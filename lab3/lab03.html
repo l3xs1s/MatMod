@@ -1,0 +1,198 @@
+<hr />
+<h2 id="front-matter">Front matter</h2>
+<p>title: "Отчёт по лабораторной работе №3</p>
+<p>Математическое моделирование" subtitle: “Модель боевых действий. Вариант №20” author: Негматуллаев Бежан Шухартович</p>
+<h2 id="generic-otions">Generic otions</h2>
+<p>lang: ru-RU toc-title: “Содержание”</p>
+<h2 id="bibliography">Bibliography</h2>
+<p>bibliography: bib/cite.bib csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl</p>
+<h2 id="pdf-output-format">Pdf output format</h2>
+toc: true # Table of contents toc-depth: 2 lof: true # List of figures fontsize: 12pt linestretch: 1.5 papersize: a4 documentclass: scrreprt ## I18n polyglossia polyglossia-lang: name: russian options: - spelling=modern - babelshorthands=true polyglossia-otherlangs: name: english ## I18n babel babel-lang: russian babel-otherlangs: english ## Fonts mainfont: Times New Roman romanfont: Times New Roman sansfont: Times New Roman monofont: Times New Roman mainfontoptions: Ligatures=TeX romanfontoptions: Ligatures=TeX sansfontoptions: Ligatures=TeX,Scale=MatchLowercase monofontoptions: Scale=MatchLowercase,Scale=0.9 ## Biblatex biblatex: true biblio-style: “gost-numeric” biblatexoptions: - parentracker=true - backend=biber - hyperref=auto - language=auto - autolang=other* - citestyle=gost-numeric ## Pandoc-crossref LaTeX customization figureTitle: “Рис.” tableTitle: “Таблица” listingTitle: “Листинг” lofTitle: “Список иллюстраций” lolTitle: “Листинги” ## Misc options indent: true header-includes: -
+<ul>
+<li><h1 id="keep-figures-where-there-are-in-the-text">keep figures where there are in the text</h1>
+<ul>
+<li><h2 id="keep-figures-where-there-are-in-the-text-1"> # keep figures where there are in the text</h2></li>
+</ul></li>
+</ul>
+<h1 id="цель-работы">Цель работы</h1>
+<p>Изучить модели боевых действий Ланчестера. Применить их на практике для решения задания лабораторной работы.</p>
+<h1 id="теоретическое-введение">Теоретическое введение</h1>
+<p>Законы Ланчестера (законы Осипова — Ланчестера) — математическая формула для расчета относительных сил пары сражающихся сторон — подразделений вооруженных сил - В противоборстве могут принимать участие как регулярные войска, так и партизанские отряды. В общем случае главной характеристикой соперников являются численности сторон. Если в какой-то момент времени одна из численностей обращается в нуль, то данная сторона считается проигравшей (при условии, что численность другой стороны в данный момент положительна).</p>
+<p>Рассмотривается три случая ведения боевых действий:</p>
+<ol type="1">
+<li><p>Боевые действия между регулярными войсками</p></li>
+<li><p>Боевые действия с участием регулярных войск и партизанских отрядов</p></li>
+<li><p>Боевые действия между партизанскими отрядами</p></li>
+</ol>
+<h1 id="задание">Задание</h1>
+<p>Между страной Х и страной У идет война. Численность состава войск исчисляется от начала войны, и являются временными функциями <span class="math inline"><em>x</em>(<em>t</em>)</span> и <span class="math inline"><em>y</em>(<em>t</em>)</span>. В начальный момент времени страна Х имеет армию численностью <span class="math inline">500000</span> человек, а в распоряжении страны У армия численностью в <span class="math inline">500000</span> человек. Для упрощения модели считаем, что коэффициенты <span class="math inline"><em>a</em></span>, <span class="math inline"><em>b</em></span>, <span class="math inline"><em>c</em></span>, <span class="math inline"><em>h</em></span> постоянны. Также считаем <span class="math inline"><em>P</em>(<em>t</em>)</span> и <span class="math inline"><em>Q</em>(<em>t</em>)</span> непрерывными функциями.</p>
+<p>Постройте графики изменения численности войск армии Х и армии У для следующих случаев:</p>
+<ol type="1">
+<li>Модель боевых действий между регулярными войсками:</li>
+</ol>
+<p><span class="math display">$$ {dx\over {dt}} = -0.405x(t)-0.7y(t)+sin(t+1)+1 $$</span> <span class="math display">$$ {dy\over {dt}} = -0.68x(t)-0.37y(t)+cos(t+2)+1$$</span></p>
+<ol start="2" type="1">
+<li>Модель ведение боевых действий с участием регулярных войск и партизанских отрядов:</li>
+</ol>
+<p><span class="math display">$$ {dx\over {dt}} = -0.304x(t)-0.78y(t)+2sin(2t)  $$</span> <span class="math display">$$ {dy\over {dt}} = -0.68x(t)y(t)-0.2y(t)+2cos(2t)  $$</span></p>
+<h1 id="задачи">Задачи</h1>
+<ol type="1">
+<li>Построить модель боевых действий между регулярными войсками на языках Julia и OpenModelica</li>
+<li>Построить модель ведения боевых действий с участием регулярных войск и партизанских отрядов на языках Julia и OpenModelica</li>
+</ol>
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной работы</h1>
+<h3 id="регулярная-армия-x-против-регулярной-армии-y">Регулярная армия X против регулярной армии Y</h3>
+<p>Рассмотрим первый случай. Численность регулярных войск определяется тремя факторами:</p>
+<ol type="1">
+<li>Cкорость уменьшения численности войск из-за причин, не связанных с боевыми действиями (болезни, травмы, дезертирство);</li>
+<li>Cкорость потерь, обусловленных боевыми действиями противоборствующих сторон (что связанно с качеством стратегии, уровнем вооружения, профессионализмом солдат и т.п.);</li>
+<li>Cкорость поступления подкрепления (задаётся некоторой функцией от времени).</li>
+</ol>
+<p>В этом случае модель боевых действий между регулярными войсками описывается следующим образом:</p>
+<p><span class="math display">$$ {dx\over {dt}} = -a(t)x(t)-b(t)y(t)+P(t) $$</span> <span class="math display">$$ {dy\over {dt}} = -c(t)x(t)-h(t)y(t)+Q(t) $$</span></p>
+<p>В первом пункте нами рассматривается как раз такая модель. Она является доработанной моделью Ланчестера, так его изначальная модель учитывала лишь члены <span class="math inline"><em>b</em>(<em>t</em>)<em>y</em>(<em>t</em>)</span> и <span class="math inline"><em>c</em>(<em>t</em>)<em>x</em>(<em>t</em>)</span>, то есть, на потери за промежуток времени влияли лишь численность армий и “эффективность оружия” (коэффициенты <span class="math inline"><em>b</em>(<em>t</em>)</span> и <span class="math inline"><em>c</em>(<em>t</em>)</span>).</p>
+<p><span class="math display">$$ {dx\over {dt}} = -ax(t)-by(t)+P(t) $$</span> <span class="math display">$$ {dy\over {dt}} = -cx(t)-hy(t)+Q(t) $$</span></p>
+<p>Именно эти уравнения [3] и будут решать наши программы для выполнения первой части задания. В конце мы получим график кривой в декартовых координатах, где по оси <span class="math inline"><em>o</em><em>x</em></span> будет отображаться численность армии государства X, по оси <span class="math inline"><em>o</em><em>y</em></span> будет отображаться соответствующая численность армии Y. По тому, с какой осью пересечётся график, можно определить исход войны. Если ось <span class="math inline"><em>o</em><em>x</em></span> будет пересечена в положительных значениях, победа будет на стороне армии государства X (так как при таком раскладе численность армии Y достигла нуля при положительном значении численности армии X). Аналогичная ситуация для оси <span class="math inline"><em>o</em><em>y</em></span> и победы армии государства Y.</p>
+<h3 id="регулярная-армия-x-против-партизанской-армии-y">Регулярная армия X против партизанской армии Y</h3>
+<p>Для второй части задания, то есть, для моделирования боевых действий между регулярной армией и партизанской армией, необходимо внести поправки в предыдущую модель. Считается, что темп потерь партизан, проводящих свои операции в разных местах на некоторой известной территории, пропорционален не только численности армейских соединений, но и численности самих партизан.</p>
+<p><span class="math display">$$ {dx\over {dt}} = -a(t)x(t)-b(t)y(t)+P(t) $$</span> <span class="math display">$$ {dy\over {dt}} = -c(t)x(t)y(t)-h(t)y(t)+Q(t) $$</span></p>
+<p>Коэффициенты <span class="math inline"><em>a</em></span>, <span class="math inline"><em>b</em></span>, <span class="math inline"><em>c</em></span> и <span class="math inline"><em>h</em></span> всё так же будут положительными десятичными числами:</p>
+<p><span class="math display">$$ {dx\over {dt}} = -ax(t)-by(t)+P(t) $$</span> <span class="math display">$$ {dy\over {dt}} = -cx(t)y(t)-hy(t)+Q(t) $$</span></p>
+<h2 id="решение-с-помощью-программ">Решение с помощью программ</h2>
+<h3 id="julia">Julia</h3>
+<h4 id="программный-код-решения-на-julia-1">Программный код решения на Julia [1]</h4>
+<p>Код программы:</p>
+<p>Случай сражения регулярная армия против регулярной армии.</p>
+<pre><code>using Plots
+using DifferentialEquations
+#X army quantity
+x0 = 27300
+#Y army quantity
+y0 = 20400
+
+a = 0.405 # army X casualties factor
+b = 0.7 # Y army efficiency
+c = 0.68 # X army efficiency
+h = 0.37 # army Y casualties factor
+
+p = (a, b, c, h)
+quantity = [x0,y0] 
+
+P(t) = sin(t+8)
+Q(t) = cos(t+6)
+
+#differential system
+function rr_warfare(dF,u,p,t)
+    a, b, c, h = p
+    dF[1] = -a * u[1] - b * u[2] + P(t) + 1
+    dF[2] = -c * u[1] - h * u[2] + Q(t) + 1
+end
+
+v0 = [0,4]
+
+problem = ODEProblem(rr_warfare,quantity,v0,p)
+solution = solve(problem)
+
+A1 = [u[1] for u in solution.u]
+A2 = [u[2] for u in solution.u]
+T1 = [t for t in solution.t]
+
+
+plt1 = plot(dpi = 300, legend= true, bg =:white)
+plot!(plt1, xlabel=&quot;Время&quot;, ylabel=&quot;Численность&quot;, title=&quot;Модель боевых действий - Регулярные армии&quot;, legend=:outerbottom)
+plot!(plt1, T1, A1, label=&quot;Численность армии X&quot;, color =:red)
+plot!(plt1, T1, A2, label=&quot;Численность армии Y&quot;, color =:green)
+savefig(plt1, &quot;lab03_1.png&quot;)</code></pre>
+<p>Случай сражения регулярной армии против партизан.</p>
+<pre><code>using Plots
+using DifferentialEquations
+
+x0 = 27300
+y0 = 20400
+t0 = 0
+
+a = 0.304 # army X casualties factor
+b = 0.78 # Y army efficiency
+c = 0.2 # X army efficiency
+h = 0.68 # army Y casualties factor
+
+p = (a, b, c, h)
+quantity = [x0,y0]
+
+P(t) = 2*sin(2*t)
+Q(t) = 2*cos(2*t)
+
+#differential system
+function rr_warfare(dF,u,p,t)
+    a, b, c, h = p
+    dF[1] = -a * u[1] - b * u[2] + P(t) 
+    dF[2] = -c * u[1] * u[2] - h * u[2] + Q(t) 
+end
+
+T = [0.0,0.0005] 
+
+problem = ODEProblem(rr_warfare,quantity,T,p)
+solution = solve(problem, dtmax = 0.000001)
+
+A1 = [u[1] for u in solution.u]
+A2 = [u[2] for u in solution.u]
+T1 = [t for t in solution.t]
+
+
+plt1 = plot(dpi = 300, legend= true, bg =:white)
+plot!(plt1, xlabel=&quot;Время&quot;, ylabel=&quot;Численность&quot;, title=&quot;Модель Регулярная армия vs Партизаны&quot;, legend=:outerbottom)
+plot!(plt1, T1, A1, label=&quot;Численность армии X&quot;, color =:red)
+plot!(plt1, T1, A2, label=&quot;Численность армии Y&quot;, color =:green)
+savefig(plt1, &quot;lab03_2.png&quot;)</code></pre>
+<h3 id="результаты-работы-кода-на-julia">Результаты работы кода на Julia</h3>
+<p>На рис. <span class="citation" data-cites="fig:001">@fig:001</span> и <span class="citation" data-cites="fig:002">@fig:002</span> изображены итоговые графики для обоих случаев.</p>
+<figure>
+<img src="Screens/lab03_1.png" id="fig:001" alt="“График в Julia. Первый случай”" /><figcaption aria-hidden="true">“График в Julia. Первый случай”</figcaption>
+</figure>
+<figure>
+<img src="Screens/lab03_2.png" id="fig:002" alt="“График в Julia. Второй случай”" /><figcaption aria-hidden="true">“График в Julia. Второй случай”</figcaption>
+</figure>
+<h3 id="программный-код-решения-на-openmodelica-2">Программный код решения на OpenModelica [2]</h3>
+<p>Случай сражения регулярная армия против регулярной армии.</p>
+<pre><code>model lab3 &quot;Battle between forces&quot;
+parameter Integer x0 = 500000;
+parameter Integer y0 = 500000;
+parameter Real a = 0.45;
+parameter Real b = 0.86;
+parameter Real c = 0.73;
+parameter Real h = 0.49;
+Real P;
+Real Q;
+Real x(start=x0);
+Real y(start=y0);
+equation
+P = sin(time + 1);
+Q = sin(time + 2);
+der(x) = - a * x - b * y + P;
+der(y) = - c * x - h * y + Q;
+end lab3;</code></pre>
+<p>Случай сражения регулярной армии против партизан.</p>
+<pre><code>model lab3 &quot;Battle between forces&quot;
+parameter Integer x0 = 500000;
+parameter Integer y0 = 500000;
+parameter Real a = 0.17;
+parameter Real b = 0.65;
+parameter Real c = 0.28;
+parameter Real h = 0.31;
+Real P;
+Real Q;
+Real x(start=x0);
+Real y(start=y0);
+equation
+P = sin(2*time);
+Q = sin(time);
+der(x) = - a * x - b * y + P + 2;
+der(y) = - c * x * y - h * y + Q + 2;
+end lab3;</code></pre>
+<h1 id="вывод">Вывод</h1>
+<p>Были изучены модели боевых действий Ланкастера. В результате были получены графики для двух случаев боевых действий.</p>
+<h1 id="список-литературы.-библиография">Список литературы. Библиография</h1>
+<p>[1] Документация по Julia: https://docs.julialang.org/en/v1/</p>
+<p>[2] Документация по OpenModelica: https://openmodelica.org/</p>
+<p>[3] Решение дифференциальных уравнений: https://www.wolframalpha.com/</p>
+<p>[4] Законы Ланчестера: https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD%D1%8B_%D0%9E%D1%81%D0%B8%D0%BF%D0%BE%D0%B2%D0%B0_%E2%80%94_%D0%9B%D0%B0%D0%BD%D1%87%D0%B5%D1%81%D1%82%D0%B5%D1%80%D0%B0</p>
