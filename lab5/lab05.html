@@ -1,0 +1,160 @@
+<hr />
+<h2 id="front-matter">Front matter</h2>
+<p>title: “Отчёт по лабораторной работе №5”</p>
+<p>Математическое моделирование" subtitle: “Модель «хищник-жертва». Вариант №20” author: "Выполнил: Негматуллаев Бежан Шухратович,</p>
+<p>НФИбд-02-21, 1032215469"</p>
+<h2 id="generic-otions">Generic otions</h2>
+<p>lang: ru-RU toc-title: “Содержание”</p>
+<h2 id="bibliography">Bibliography</h2>
+<p>bibliography: bib/cite.bib csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl</p>
+<h2 id="pdf-output-format">Pdf output format</h2>
+toc: true # Table of contents toc-depth: 2 lof: true # List of figures fontsize: 12pt linestretch: 1.5 papersize: a4 documentclass: scrreprt ## I18n polyglossia polyglossia-lang: name: russian options: - spelling=modern - babelshorthands=true polyglossia-otherlangs: name: english ## I18n babel babel-lang: russian babel-otherlangs: english ## Fonts mainfont: Times New Roman romanfont: Times New Roman sansfont: Times New Roman monofont: Times New Roman mainfontoptions: Ligatures=TeX romanfontoptions: Ligatures=TeX sansfontoptions: Ligatures=TeX,Scale=MatchLowercase monofontoptions: Scale=MatchLowercase,Scale=0.9 ## Biblatex biblatex: true biblio-style: “gost-numeric” biblatexoptions: - parentracker=true - backend=biber - hyperref=auto - language=auto - autolang=other* - citestyle=gost-numeric ## Pandoc-crossref LaTeX customization figureTitle: “Рис.” tableTitle: “Таблица” listingTitle: “Листинг” lofTitle: “Список иллюстраций” lolTitle: “Листинги” ## Misc options indent: true header-includes: -
+<ul>
+<li><h1 id="keep-figures-where-there-are-in-the-text">keep figures where there are in the text</h1>
+<ul>
+<li><h2 id="keep-figures-where-there-are-in-the-text-1"> # keep figures where there are in the text</h2></li>
+</ul></li>
+</ul>
+<h1 id="цель-работы">Цель работы</h1>
+<p>Изучить взаимодействие двух видов типа “хищник - жертва” - модель Лотки-Вольтерры.</p>
+<h1 id="теоретическое-введение">Теоретическое введение</h1>
+<ul>
+<li><p>Численность популяции жертв x и хищников y зависят только от времени (модель не учитывает пространственное распределение популяции на занимаемой территории)</p></li>
+<li><p>В отсутствии взаимодействия численность видов изменяется по модели Мальтуса, при этом число жертв увеличивается, а число хищников падает</p></li>
+<li><p>Естественная смертность жертвы и естественная рождаемость хищника считаются несущественными</p></li>
+<li><p>Скорость роста численности жертв уменьшается пропорционально численности хищников</p></li>
+</ul>
+<h1 id="задачи">Задачи</h1>
+<ol type="1">
+<li><p>Разобраться в модели Лотки-Вольтерры</p></li>
+<li><p>Построить график зависимости численности хищников от численности жертв, а также графики изменения численности хищников и численности жертв</p></li>
+<li><p>Найти стационарное состояние системы</p></li>
+</ol>
+<h1 id="задание">Задание</h1>
+<p>Вариант 20:</p>
+<p>Для модели «хищник-жертва»:</p>
+<p>(Screens/1.png)</p>
+<p>Постройте график зависимости численности хищников от численности жертв, а также графики изменения численности хищников и численности жертв при следующих начальных условиях: x0 = 4, y0 = 13. Найдите стационарное состояние системы.</p>
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной работы</h1>
+<h2 id="построение-математической-модели.-решение-с-помощью-программ">Построение математической модели. Решение с помощью программ</h2>
+<h3 id="julia">Julia</h3>
+<p>Код программы для первого случая:</p>
+<pre><code>using Plots
+using DifferentialEquations
+
+x0 = 6
+y0 = 14
+
+a = 0.61
+b = 0.41
+c = 0.051
+d = 0.031
+
+
+function ode_fn(du, u, p, t)
+    x, y = u
+    du[1] = -a*u[1] + c * u[1] * u[2]
+    du[2] = b * u[2] - d * u[1] * u[2]
+end
+
+v0 = [x0, y0]
+tspan = (0.0, 60.0)
+prob = ODEProblem(ode_fn, v0, tspan)
+sol = solve(prob, dtmax=0.05)
+X = [u[1] for u in sol.u]
+Y = [u[2] for u in sol.u]
+T = [t for t in sol.t]
+
+plt = plot(
+  dpi=300,
+  legend=false)
+
+plot!(
+  plt,
+  X,
+  Y,
+  label=&quot;Зависимость численности хищников от численности жертв&quot;,
+  color=:blue)
+
+savefig(plt, &quot;julia1-1.png&quot;)
+
+plt2 = plot(
+  dpi=300,
+  legend=true)
+
+plot!(
+  plt2,
+  T,
+  X,
+  label=&quot;Численность жертв&quot;,
+  color=:green)
+
+plot!(
+  plt2,
+  T,
+  Y,
+  label=&quot;Численность хищников&quot;,
+  color=:red)
+
+savefig(plt2, &quot;julia1-2.png&quot;)</code></pre>
+<p>Код программы для второго случая:</p>
+<pre><code>using Plots
+using DifferentialEquations
+
+a = 0.61
+b = 0.41
+c = 0.051
+d = 0.031
+
+x0 = c / d 
+y0 = a / b
+
+function ode_fn(du, u, p, t)
+    x, y = u
+    du[1] = -a*u[1] + c * u[1] * u[2]
+    du[2] = b * u[2] - d * u[1] * u[2]
+end
+
+v0 = [x0, y0]
+tspan = (0.0, 60.0)
+prob = ODEProblem(ode_fn, v0, tspan)
+sol = solve(prob, dtmax=0.05)
+X = [u[1] for u in sol.u]
+Y = [u[2] for u in sol.u]
+T = [t for t in sol.t]
+
+plt2 = plot(
+  dpi=300,
+  legend=true)
+
+plot!(
+  plt2,
+  T,
+  X,
+  label=&quot;Численность жертв&quot;,
+  color=:green)
+
+plot!(
+  plt2,
+  T,
+  Y,
+  label=&quot;Численность хищников&quot;,
+  color=:red)
+
+savefig(plt2, &quot;julia2.png&quot;)</code></pre>
+<h3 id="результаты-работы-кода-на-julia">Результаты работы кода на Julia</h3>
+<p>Первый случай:</p>
+<p>Графики изменения численности хищников и численности жертв при следующих начальных условиях</p>
+<figure>
+<img src="Screens/julia1-1.png" id="fig:001" alt="“График изменения численности хищников на языке Julia”" /><figcaption aria-hidden="true">“График изменения численности хищников на языке Julia”</figcaption>
+</figure>
+<figure>
+<img src="Screens/julia1-2.png" id="fig:002" alt="“графики изменения численности жертв на языке Julia”" /><figcaption aria-hidden="true">“графики изменения численности жертв на языке Julia”</figcaption>
+</figure>
+<p>Второй случай:</p>
+<p>График зависимости численности хищников от численности жертв</p>
+<figure>
+<img src="Screens/julia2.png" id="fig:003" alt="“График зависимости численности хищников от численности жертв на языке Julia”" /><figcaption aria-hidden="true">“График зависимости численности хищников от численности жертв на языке Julia”</figcaption>
+</figure>
+<h1 id="вывод">Вывод</h1>
+<p>В ходе выполнения лабораторной работы были построены графики изменения численности хищников и численности жертв при начальных условиях, а также график зависимости численности хищников от численности жертв</p>
