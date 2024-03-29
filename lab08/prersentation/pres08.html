@@ -1,0 +1,134 @@
+<h1 id="цель-работы">Цель работы</h1>
+<p>Изучить и построить модель конкуренции двух фирм.</p>
+<h1 id="задание">Задание</h1>
+<p><strong>Вариант 59</strong></p>
+<blockquote>
+<p>Случай 1 <span class="math display">$$\frac{dM_1}{d\Theta} = M_1 -
+\frac{b}{c_1}M_1 M_2 - \frac{a1}{c1} M_1^2 $$</span></p>
+</blockquote>
+<p><span class="math display">$$ \frac{dM_2}{d\Theta} = \frac{c_2}{c_1}
+M_2 - \frac{b}{c_1} M_1 M_2 - \frac{a_2}{c_1} M_2^2$$</span> где</p>
+<p><span class="math display">$$ a_1 = \frac{p_{cr}}{\tau_1^2
+\widetilde{p}_1^2 Nq } $$</span> <span class="math display">$$ a_2 =
+\frac{p_{cr}}{\tau_2^2 \widetilde{p}_2^2 Nq } $$</span> <span
+class="math display">$$ b = \frac{p_{cr}}{\tau_1^2 \widetilde{p}_1^2
+\tau_2^2 \widetilde{p}_2^2 Nq} $$</span> <span class="math display">$$
+c_1 = \frac{p_{cr} - \widetilde{p}_1}{\tau_1 \widetilde{p}_1} $$</span>
+<span class="math display">$$ c_2 = \frac{p_{cr} -
+\widetilde{p}_2}{\tau_2 \widetilde{p}_2} $$</span></p>
+<p>также введена нормировка <span
+class="math inline"><em>t</em> = <em>c</em><sub>1</sub><em>Θ</em></span></p>
+<h1 id="задание-1">Задание</h1>
+<blockquote>
+<p>Случай 2</p>
+</blockquote>
+<p><span class="math display">$$\frac{dM_1}{d\Theta} = M_1 -
+(\frac{b}{c_1} + 0.00049)M_1 M_2 - \frac{a1}{c1} M_1^2 $$</span></p>
+<p><span class="math display">$$ \frac{dM_2}{d\Theta} = \frac{c_2}{c_1}
+M_2 - \frac{b}{c_1} M_1 M_2 - \frac{a_2}{c_1} M_2^2$$</span></p>
+<p>Для обоих случаев рассмотрим задачу со следующими начальными
+условиями и параметрами</p>
+<p><span
+class="math display"><em>M</em><sub>0</sub><sup>1</sup> = 8.8 <em>M</em><sub>0</sub><sup>2</sup> = 9.9</span>
+<span
+class="math display"><em>p</em><sub><em>c</em><em>r</em></sub> = 30 <em>N</em> = 80 <em>q</em> = 1</span>
+<span
+class="math display"><em>τ</em><sub>1</sub> = 10.1 <em>τ</em><sub>2</sub> = 11.5</span>
+<span
+class="math display"><em>p̃</em><sub>1</sub> = 10.1 <em>p̃</em><sub>2</sub> = 11.5</span></p>
+<h1 id="задачи">Задачи</h1>
+<ol type="1">
+<li><p>Изучить модель конкуренции двух фирм</p></li>
+<li><p>Построить графики изменения оборотных средств двух фирм для обоих
+случаев</p></li>
+</ol>
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h1>
+<p>Код программы для первого случая:</p>
+<figure id="fig:001">
+<img src="Screens/1.PNG" style="width:70.0%;height:70.0%"
+alt="Реализация на языке Julia" />
+<figcaption aria-hidden="true">Реализация на языке Julia</figcaption>
+</figure>
+<h1 id="выполнение-лабораторной-работы-1">Выполнение лабораторной
+работы</h1>
+<p>Код программы для второго случая:</p>
+<figure id="fig:002">
+<img src="Screens/2.PNG" style="width:70.0%;height:70.0%"
+alt="Реализация на языке Julia" />
+<figcaption aria-hidden="true">Реализация на языке Julia</figcaption>
+</figure>
+<h1 id="выполнение-лабораторной-работы-2">Выполнение лабораторной
+работы</h1>
+<figure id="fig:003">
+<img src="Screens/jl1.PNG" style="width:70.0%;height:70.0%"
+alt="График конкуренции двух фирм фирм для первого случая, построенный на языке Julia" />
+<figcaption aria-hidden="true">График конкуренции двух фирм фирм для
+первого случая, построенный на языке Julia</figcaption>
+</figure>
+<h1 id="выполнение-лабораторной-работы-3">Выполнение лабораторной
+работы</h1>
+<figure id="fig:004">
+<img src="Screens/jl2.PNG" style="width:70.0%;height:70.0%"
+alt="График конкуренции двух фирм для второго случая, построенный на языке Julia" />
+<figcaption aria-hidden="true">График конкуренции двух фирм для второго
+случая, построенный на языке Julia</figcaption>
+</figure>
+<h1 id="выполнение-лабораторной-работы-4">Выполнение лабораторной
+работы</h1>
+<p>Код программы для первого случая:</p>
+<figure id="fig:005">
+<img src="Screens/3.PNG" style="width:70.0%;height:70.0%"
+alt="Реализация на языке Modelica" />
+<figcaption aria-hidden="true">Реализация на языке Modelica</figcaption>
+</figure>
+<h1 id="выполнение-лабораторной-работы-5">Выполнение лабораторной
+работы</h1>
+<p>Код программы для второго случая:</p>
+<figure id="fig:006">
+<img src="Screens/4.PNG" style="width:70.0%;height:70.0%"
+alt="Реализация на языке Modelica" />
+<figcaption aria-hidden="true">Реализация на языке Modelica</figcaption>
+</figure>
+<h1 id="выполнение-лабораторной-работы-6">Выполнение лабораторной
+работы</h1>
+<figure id="fig:007">
+<img src="Screens/mo1.PNG" style="width:70.0%;height:70.0%"
+alt="График конкуренции двух фирм для первого случая, построенный с помощью OpenModelica" />
+<figcaption aria-hidden="true">График конкуренции двух фирм для первого
+случая, построенный с помощью OpenModelica</figcaption>
+</figure>
+<h1 id="выполнение-лабораторной-работы-7">Выполнение лабораторной
+работы</h1>
+<figure id="fig:008">
+<img src="Screens/mo2.PNG" style="width:70.0%;height:70.0%"
+alt="График конкуренции двух фирм для второго случая, построенный с помощью OpenModelica" />
+<figcaption aria-hidden="true">График конкуренции двух фирм для второго
+случая, построенный с помощью OpenModelica</figcaption>
+</figure>
+<h1 id="анализ-полученных-результатов.-сравнение-языков.">Анализ
+полученных результатов. Сравнение языков.</h1>
+<p>В итоге проделанной работы на языках Julia и OpenModelica мы
+построили графики изменения оборотных средств для двух фирм для случаев,
+когда конкурентная борьба ведётся только рыночными методами и когда,
+помимо экономического фактора влияния, используются еще и
+социально-психологические факторы.</p>
+<p>Построение модели конкуренции двух фирм на языке OpenModelica
+занимает значительно меньше строк кода, чем аналогичное построение на
+Julia.</p>
+<h1 id="вывод">Вывод</h1>
+<p>В ходе выполнения лабораторной работы была изучена модель конкуренции
+двух фирм и в дальнейшем построена модель на языках Julia и Open
+Modelica.</p>
+<h1 id="список-литературы.-библиография.">Список литературы.
+Библиография.</h1>
+<p>[1] Документация по Julia: https://docs.julialang.org/en/v1/</p>
+<p>[2] Документация по OpenModelica: https://openmodelica.org/</p>
+<p>[3] Решение дифференциальных уравнений:
+https://www.wolframalpha.com/</p>
+<p>[4] Мальтузианская модель роста:
+https://www.stolaf.edu//people/mckelvey/envision.dir/malthus.html</p>
+<p>[5] Математические модели конкурентной среды:
+https://dspace.spbu.ru/bitstream/11701/12019/1/Gorynya_2018.pdf</p>
+<p>[6] Разработка математических моделей конкурентных процессов:
+https://www.academia.edu/9284004/Наумейко_РАЗРАБОТКА_МАТЕМАТИЧЕСКОЙ_МОДЕЛИ_КОНКУРЕНТНЫХ_ПРОЦЕССОВ</p>
